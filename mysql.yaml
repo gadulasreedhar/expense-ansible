@@ -1,6 +1,9 @@
 - name: mysql configuration
   hosts: mysql
   become: yes
+  vars:
+    mysql_root_password: ExpenseApp@1
+    login_host: mysql.dev2011.online
   tasks:
   - name: install mysql server
     ansible.builtin.package:
@@ -13,4 +16,15 @@
       state: started
       enabled: yes
       
+  - name: connect to mysql
+    community.mysql.mysql_info:
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      login_host: "{{ login_host }}"
+    register: mysql_info
+  
+  - name: print mysql info
+    ansible.builtin.debug:
+      msg: "{{ mysql_info }}"
+
 
