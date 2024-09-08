@@ -51,7 +51,7 @@
       login_user: root
       login_password: "{{ mysql_root_password }}"
       login_host: "{{ login_host }}"
-      targe: /app/schema/backend.sql
+      target: /app/schema/backend.sql
       name: all
       state: dump
 
